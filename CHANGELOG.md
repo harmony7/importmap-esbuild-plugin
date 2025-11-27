@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [unreleased]
 
+## [0.1.1] - 2025-11-27
+
 ### Fixed
 
 - Fix default export
@@ -15,5 +17,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial code
 
-[unreleased]: https://github.com/harmony7/importmap-esbuild-plugin/compare/v0.1.0...HEAD
+[unreleased]: https://github.com/harmony7/importmap-esbuild-plugin/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/harmony7/importmap-esbuild-plugin/compare/v0.1.0...0.1.1
 [0.1.0]: https://github.com/harmony7/importmap-esbuild-plugin/releases/tag/v0.1.0
