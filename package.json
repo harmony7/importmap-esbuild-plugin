@@ -1,0 +1,54 @@
+{
+  "name": "@h7/importmap-esbuild-plugin",
+  "type": "module",
+  "version": "0.1.0",
+  "description": "An esbuild plugin that enables import maps during bundling",
+  "contributors": [
+    {
+      "name": "Katsuyuki Omuro",
+      "email": "harmony7@pex2.jp"
+    }
+  ],
+  "main": "./build/index.js",
+  "types": "./build/index.d.ts",
+  "files": [
+    "LICENSE",
+    "README.md",
+    "CHANGELOG.md",
+    "build/**/*"
+  ],
+  "scripts": {
+    "prepack": "npm run build",
+    "build": "npm run test && npm run build-package",
+    "build-package": "npm run build-package:clean && npm run build-package:compile",
+    "build-package:clean": "rimraf build",
+    "build-package:compile": "tsc --build tsconfig.build.json",
+    "coverage": "c8 npm test",
+    "test": "npm run test:unit",
+    "test:unit": "glob-bin -c \"node --loader ts-node/esm --enable-source-maps --no-warnings=ExperimentalWarning --test\" \"./test/**/*.test.ts\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/harmony7/importmap-esbuild-plugin.git"
+  },
+  "readmeFilename": "README.md",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/harmony7/importmap-esbuild-plugin/issues"
+  },
+  "homepage": "https://github.com/harmony7/importmap-esbuild-plugin#readme",
+  "peerDependencies": {
+    "esbuild": "~0.27.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "c8": "^10.1.3",
+    "esbuild": "^0.27.0",
+    "glob-bin": "^1.0.0",
+    "rimraf": "^6.1.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}
