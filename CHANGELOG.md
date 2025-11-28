@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [unreleased]
 
+### Fixed
+
+- Prefix import map keys (ending in `/`) are now required to map to values that also end in `/`, matching the HTML import map spec.
+   - Previously, such mappings would be accepted and could result in confusing behavior.
+
 ## [0.1.1] - 2025-11-27
 
 ### Fixed

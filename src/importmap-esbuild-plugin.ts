@@ -29,6 +29,7 @@ export function importMapEsbuildPlugin(params?: ImportMapEsbuildPluginParams): P
   const timeoutMs = params?.timeoutMs ?? 30_000;
   const loaderResolver = params?.loaderResolver;
   const enableHttp = params?.enableHttp ?? false;
+  validatePrefixMappings(imports);
   const prefixKeys = Object.keys(imports)
     .filter(k => k.endsWith('/'))
     .sort((a, b) => b.length - a.length); // longest first
@@ -120,6 +121,17 @@ export function importMapEsbuildPlugin(params?: ImportMapEsbuildPluginParams): P
       });
     },
   } satisfies Plugin;
+}
+
+function validatePrefixMappings(imports: Record<string, string>): void {
+  for (const [key, value] of Object.entries(imports)) {
+    if (key.endsWith('/') && !value.endsWith('/')) {
+      throw new Error(
+        `${PLUGIN_NAME}: import map prefix key "${key}" must map to a value ending with "/". ` +
+        `Got "${value}".`
+      );
+    }
+  }
 }
 
 function resolveTarget(

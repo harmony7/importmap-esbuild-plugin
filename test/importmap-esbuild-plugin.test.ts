@@ -390,6 +390,30 @@ test("exact-only mapping does not apply to subpaths", async () => {
   });
 });
 
+test('prefix mapping requires target value to end with "/"', async () => {
+  await withTempDir(async (tmpDir) => {
+    // Minimal entry file – it won't actually get to bundling because the plugin
+    // should throw on invalid import map during plugin setup.
+    await tmpDir.createFile('./index.js', 'console.log("ok");\n');
+
+    await assert.rejects(
+      () =>
+        runBuild(tmpDir.resolve('./index.js'), {
+          importMapEsbuildPluginParams: {
+            importMap: {
+              imports: {
+                // ❌ invalid: key ends with "/", value does not
+                'pkg/': './pkg',
+              },
+            },
+            baseDir: tmpDir.dir,
+          },
+        }),
+      /prefix key "pkg\/" must map to a value ending with "\/"/,
+    );
+  });
+});
+
 test('prefix mapping rewrites subpath imports', async () => {
   await withTempDir(async (tmpDir) => {
     await tmpDir.createFile(
